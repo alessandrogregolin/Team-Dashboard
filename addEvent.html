@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-functions.js"></script>
+
+  <script type="text/javascript" src="js/addEvent.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+  <title>Team Dashboard - Add Event</title>
+</head>
+
+<body>
+  <!-- ---------------------------------  NAVBAR  --------------------------------- -->
+  <nav class="navbar navbar-expand-md navbar-light">
+    <div class="container justify-content-center"> <button class="navbar-toggler navbar-toggler-right border-0" type="button"
+        data-toggle="collapse" data-target="#navbar3">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3">
+        <ul class="navbar-nav" style="align-items:center;">
+          <li class="nav-item mx-2"> <a class="nav-link" href="playerStats.html">PLAYER STATISTICS</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="home.html">CALENDAR</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link navbar-brand mr-0 text-primary" href="addEvent.html">
+              <img src="img/dashLogo.jpg" class="d-inline-block align-top" width="50" height="50" alt="noventalogo"></a>
+          </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="gameStats.html">GAME STATISTICS</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="equipment.html">EQUIPMENT</a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- -----------------------  SECTION FOR ADDING AN EVENT  ---------------------- -->
+  <div class="py-5" style="padding-top: 15px !important;">
+    <div class="col-md-12 text-center" style="margin-bottom: 20px;"><span style="font-size: 2vw; font-weight: bold; ">Add
+        New Event</span></div>
+    <div class="container" style="background-color: #DCDCDC; padding: 20px; border-radius: 10px;">
+      <div class="col-md-12 alertSpan" style="color: red; display:none;" id="typeAlert">Please choose the type of event</div>
+      <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-primary" onclick="changeViewTraining()" id="trainingBtn" style="width: 100%; background-color: white; border: 0; text-transform: uppercase; font-weight: bold; border: 1px solid orange; margin-bottom: 10px; ">Training</a>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-primary" onclick="changeViewGame()" id="gameBtn" style="width: 100%; background-color: white; border: 0; text-transform: uppercase; font-weight: bold;border: 1px solid orange; margin-bottom: 10px;">Game</a>
+        </div>
+      </div>
+      <!--TODO: add the choice of the hour and the minutes for the events-->
+
+      <!-- ----  SECTION CONTAINING ALL FIELDS FOR COMPLETING A TRAINING EVENT  --- -->
+      <div id="trainingFields">
+        <div class="row">
+          <div class="col-md-12 alertSpan" style="color: red; display:none;" id="descriptionAlert">Please add a
+            description for the event</div>
+          <div class="col-md-12">
+            <div class="form-group"><input class="form-control form-inputs" type="text" placeholder="Training Description"
+                id="trainingDescription"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 alertSpan" style="color: red; display:none;" id="dateAlert">Please select the date of
+            the event</div>
+          <div class="col-md-12">
+            <div class="form-group"><input class="form-control form-inputs" type="date" placeholder="Training Date" id="trainingDate"
+                value=""></div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <span style="font-weight: bold; text-decoration: underline;">TRAINING CATEGORY</span>
+        </div>
+        <div class="col-md-12 alertSpan" style="color: red; display:none;" id="categoryAlert">You must select at least
+          1 category</div>
+        <div class="row text-center" style="margin-top: 20px;">
+          <div class="col-md-4">
+            <label class="myLabel" id="shootingLabel"><input type='checkbox' class="check" id="shooting">Shooting</label>
+          </div>
+          <div class="col-md-4">
+            <label class="myLabel" id="dribblingLabel"><input type='checkbox' class="check" id="dribbling">Dribbling</label>
+          </div>
+          <div class="col-md-4">
+            <label class="myLabel" id="passingLabel"><input type='checkbox' class="check" id="passing">Passing</label>
+          </div>
+          <div class="col-md-4">
+            <label class="myLabel" id="schemesLabel"><input type='checkbox' class="check" id="schemes">Schemes</label>
+          </div>
+          <div class="col-md-4">
+            <label class="myLabel" id="athleticsLabel"><input type='checkbox' class="check" id="athletics">Athletics</label>
+          </div>
+          <div class="col-md-4">
+            <label class="myLabel" id="aerobicLabel"><input type='checkbox' class="check" id="aerobic">Aerobic</label>
+          </div>
+        </div>
+        <div class="col-md-12 text-center" id="trainingPresenceLabel">
+          <span style="font-weight: bold; text-decoration: underline;">TRAINING PRESENCE</span>
+        </div>
+        <div class="col-md-12 alertSpan" style="color: red; display:none;" id="presenceAlert">Please fill in the
+          presence for all
+          players</div>
+
+        <div class="row justify-content-center text-center" style="display: none; margin-top: 10px;" id="futureEvent">
+          <!--Here will go all of the cards for the various players and their presence-->
+          <button style="width: 200px; height: 3; background-color: white; border: 1px solid orange;" class="text-center"><b>This
+              is a future event</b></button>
+        </div>
+        <div class="row justify-content-center" id="presenceContainer">
+          <!--Here will go all of the cards for the various players and their presence-->
+        </div>
+
+      </div>
+
+      <!-- ------  SECTION CONTAINING ALL FIELDS FOR COMPLETING A GAME EVENT  ----- -->
+      <div id="gameFields" style="display:none;">
+        <div class="row">
+          <div class="col-md-12 alertSpan" style="color: red; display:none;" id="opponentTeamAlert">Please add an
+            opponent team</div>
+          <div class="col-md-12">
+            <div class="form-group"><input class="form-control form-inputs" type="text" list="teamChoice" placeholder="Opponent Team"
+                id="opponentTeam"></div>
+            <datalist id="teamChoice"></datalist>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 alertSpan" style="color: red; display:none;" id="gameDateAlert">Please select the date
+            of the game</div>
+          <div class="col-md-12">
+            <div class="form-group"><input class="form-control form-inputs" type="date" placeholder="Game Date" id="gameDate"></div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center" style="margin-top: 10px; margin-bottom: 10px;">
+          <span style="font-weight: bold; text-decoration: underline;">GAME RESULT</span>
+        </div>
+        <div class="row justify-content-center text-center" style="display: none; margin-top: 10px;" id="futureEventScore">
+          <!--Here will go all of the cards for the various players and their presence-->
+          <button style="width: 200px; height: 3; background-color: white; border: 1px solid orange;" class="text-center"><b>This
+              is a future event</b></button>
+        </div>
+        <div class="row justify-content-center" id="scoreFields">
+          <div class="col-md-3 text-center">
+            <span class="alertSpan" style="color: red; display:none;" id="homeScoreAlert">Please fill in</span>
+            <span style="font-weight: bold;">Home</span>
+            <div class="form-group" style="margin-top: 10px;"> <input class="form-control form-inputs" type="number"
+                placeholder="Home" id="homeScore"></div>
+          </div>
+          <div class="cold-md-1 align-middle" style="line-height: 100px;"><span style="vertical-align: middle; font-weight: bold;">VS</span></div>
+          <div class="col-md-3 text-center">
+            <span class="alertSpan" style="color: red; display:none;" id="opponentScoreAlert">Please fill in</span>
+            <span style="font-weight: bold;">Opponent</span>
+            <div class="form-group" style="margin-top: 10px;"> <input class="form-control form-inputs" type="number"
+                placeholder="Away" id="opponentScore"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 alertSpan" style="color: red; display:none;" id="gameCommentAlert">Please add a short
+            comment on the game</div>
+          <div class="col-md-12">
+            <textarea id="gameComment" style="width: 100%; height: 150px; padding: 15px; resize: none;" placeholder="Game Comment"
+              class="form-inputs form-control"></textarea>
+          </div>
+        </div>
+        <div class="col-md-12 text-center" style="margin-top: 10px;">
+          <span style="font-weight: bold; text-decoration: underline;">PLAYERS STATISTICS</span>
+        </div>
+        <div class="row justify-content-center text-center" style="display: none; margin-top: 10px;" id="futureEventStats">
+          <!--Here will go all of the cards for the various players and their presence-->
+          <button style="width: 200px; height: 3; background-color: white; border: 1px solid orange;" class="text-center"><b>This
+              is a future event</b></button>
+        </div>
+        <div class="row justify-content-center" id="statsContainer">
+          <div class="col-md-12 alertSpan" style="color: red; display:none; margin-top: 10px;" id="gameStatsAlert">Please
+            add statistics
+            for at least 1 player</div>
+          <!--Here will go all of the cards for the various players and their presence-->
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-12 text-center" style="margin-top: 20px;"><a class="btn btn-primary" style="background-color: orange; color: white; border: 0;"
+        onclick="uploadEvent()">Upload Event</a></div>
+  </div>
+
+  <!--Loading all components for bootstrap-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

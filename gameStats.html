@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animate.min.css">
+
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-functions.js"></script>
+
+  <script type="text/javascript" src="js/gameStats.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <title>Team Dashboard</title>
+</head>
+
+<body>
+  <!--NavBar-->
+  <nav class="navbar navbar-expand-md navbar-light">
+    <div class="container justify-content-center"> <button class="navbar-toggler navbar-toggler-right border-0"
+        type="button" data-toggle="collapse" data-target="#navbar3">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3">
+        <ul class="navbar-nav" style="align-items:center;">
+          <li class="nav-item mx-2"> <a class="nav-link" href="playerStats.html">PLAYER STATISTICS</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="index.html">CALENDAR</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link navbar-brand mr-0 text-primary" href="addEvent.html">
+              <img src="img/dashLogo.jpg" class="d-inline-block align-top" width="50" height="50"
+                alt="noventalogo"></a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link active" href="gameStats.html">GAME STATISTICS</a> </li>
+          <li class="nav-item mx-2"> <a class="nav-link" href="equipment.html">EQUIPMENT</a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--Section for the content of the page-->
+  <div class="col-md-12">
+    <div class="row text-center p-3" style="border-bottom: 1px solid#E0E0E0;">
+      <div class="col-md-3">
+        <h3>Points Scored</h3>
+        <h3 style="color: orange;" id="pointsScored"></h3>
+      </div>
+      <div class="col-md-3">
+        <h3>Wins</h3>
+        <h3 style="color: orange;" id="totalWins"></h3>
+      </div>
+      <div class="col-md-3">
+        <h3>Losses</h3>
+        <h3 style="color: orange;" id="totalLosses"></h3>
+      </div>
+      <div class="col-md-3 text-center">
+        <h3>Win %</h3>
+        <h3 style="color: orange;" id="winPercentage"></h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <!--Here go all of the cards for the games played by the team-->
+    <div class="row justify-content-center m-4" id="gameCardContainer">
+    </div>
+  </div>
+  </div>
+
+  <!--Game details modal shows statistics of all players-->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#eventInfoModal"
+    id="eventModalTrigger" style="display:none;">Open Modal</button>
+  <div id="eventInfoModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><i class="fas fa-trophy fa-lg"></i></h4>
+          <h4 class="modal-title" style="color:orange;" id="eventDate"></h4>
+        </div>
+        <div class="modal-body">
+          <!--Modal content for game event-->
+          <div class="row" style="margin-bottom: 20px;" id="gameModal">
+            <div class="col-md-12">
+              <h3 style="margin-top: 20px;" id="opponentH3">Opponent: <span style="color: orange;"
+                  id="opponentTeam"></span></h3>
+              <hr id="eventHR">
+              <div class="row justify-content-center" style="margin-top: 30px;" id="eventScore">
+                <div class="col-md-3 text-center">
+                  <span style="font-weight: bold; font-size: 2.5vw;">Home</span>
+                  <div class="form-group" style="margin-top: 10px;">
+                    <h3 id="eventHomeScore" style="color: orange;"></h3>
+                  </div>
+                </div>
+                <div class="cold-md-1 align-middle" style="line-height: 100px;"><span
+                    style="vertical-align: middle; font-weight: bold; font-size: 2vw;">VS</span></div>
+                <div class="col-md-3 text-center">
+                  <span style="font-weight: bold; font-size: 2.5vw;">Opponent</span>
+                  <div class="form-group" style="margin-top: 10px;">
+                    <h3 id="eventOpponentScore" style="color: orange;"></h3>
+                  </div>
+                </div>
+              </div>
+              <hr id="eventHR">
+              <h3 style="margin-top: 20px;" id="commentH3">Comment: <span style="color: orange;"
+                  id="eventComment"></span></h3>
+              <hr id="eventHR">
+              <!-- Here will go all of the players statistics-->
+              <div class="card-columns" id="playerStatsColumns">
+                <!--Here create a card for every player that has some statistics-->
+                <div class="card text-center p-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
+                    </p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" style="background-color:orange; color: white;"
+              data-dismiss="modal" id="closeEventModal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Loading all components for bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
