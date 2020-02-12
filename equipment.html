@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animate.min.css">
 
@@ -18,16 +18,16 @@
 
   <script type="text/javascript" src="js/equipment.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <title>Team Dashboard</title>
 </head>
 
 <body>
   <!-- ---------------------------------  NAVBAR  --------------------------------- -->
   <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container justify-content-center"> <button class="navbar-toggler navbar-toggler-right border-0" type="button"
-        data-toggle="collapse" data-target="#navbar3">
+    <div class="container justify-content-center"> <button class="navbar-toggler navbar-toggler-right border-0"
+        type="button" data-toggle="collapse" data-target="#navbar3">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3">
@@ -46,77 +46,91 @@
 
   <!-- -------------------  SECTION FOR THE CONTENT OF THE PAGE  ------------------ -->
   <div class="py-5">
-    <div class="col-md-12 text-center" style="margin-bottom: 20px;"><span style="font-size: 2vw; font-weight: bold; ">Team Equipment</span></div>
+    <div class="col-md-12 text-center" style="margin-bottom: 20px;"><span
+        style="font-size: 2vw; font-weight: bold; ">Team Equipment</span></div>
     <div class="col-md-12 text-center" style="margin-bottom: 15px;"><span id="equipmentAlert"></span></div>
     <div class="container">
       <div class="row" style="height: 70px;">
         <div class="col-md-10 equipmentCol10">
           <div class="col-md-1 text-center equipmentDivs"><img src="img/basketball_icon.png" alt="basketball_icon"
               style="width: 100%; height: 100%;"></div>
-          <div class="col-md-4 text-center equipmentDivs"> <span id="basketballOwned" class="equipmentSpan"></span></div>
-          <div class="col-md-4 text-center equipmentDivs"><span id="basketballExpected" class="equipmentSpan"></span></div>
-          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestBasketball" onclick="requestItem(this.id)"
-              class="btn">
+          <div class="col-md-4 text-center equipmentDivs"> <span id="basketballOwned" class="equipmentSpan"></span>
+          </div>
+          <div class="col-md-4 text-center equipmentDivs"><span id="basketballExpected" class="equipmentSpan"></span>
+          </div>
+          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestBasketball"
+              onclick="requestItem(this.id)" class="btn">
               + Request</button></div>
         </div>
         <div class="col-md-2 equipmentDivs text-center" style="border-right: 0;">
-          <a id="plusBasketball" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i class="fas fa-plus-circle fa-lg"></i></a>
+          <a id="plusBasketball" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i
+              class="fas fa-plus-circle fa-lg"></i></a>
           <a id="minusBasketball" onclick="minusEquipment(this.id)"><i class="fas fa-lg fa-minus-circle"></i></a>
         </div>
       </div>
       <div class="row" style="height: 70px; margin-top: 25px;">
         <div class="col-md-10 equipmentCol10">
-          <div class="col-md-1 text-center equipmentDivs"><img src="img/push_icon.png" alt="basketball_icon" style="width: 100%; height: 100%;"></div>
+          <div class="col-md-1 text-center equipmentDivs"><img src="img/push_icon.png" alt="basketball_icon"
+              style="width: 100%; height: 100%;"></div>
           <div class="col-md-4 text-center equipmentDivs"><span id="obstacleOwned" class="equipmentSpan"></span></div>
-          <div class="col-md-4 text-center equipmentDivs"><span id="obstacleExpected" class="equipmentSpan"></span></div>
-          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestObstacle" onclick="requestItem(this.id)"
-              class="btn">
+          <div class="col-md-4 text-center equipmentDivs"><span id="obstacleExpected" class="equipmentSpan"></span>
+          </div>
+          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestObstacle"
+              onclick="requestItem(this.id)" class="btn">
               + Request</button></div>
         </div>
         <div class="col-md-2 equipmentDivs text-center" style="border-right: 0;">
-          <a id="plusObstacle" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i class="fas fa-plus-circle fa-lg"></i></a>
+          <a id="plusObstacle" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i
+              class="fas fa-plus-circle fa-lg"></i></a>
           <a id="minusObstacle" onclick="minusEquipment(this.id)"><i class="fas fa-lg fa-minus-circle"></i></a>
         </div>
       </div>
       <div class="row" style="height: 70px; margin-top: 25px;">
         <div class="col-md-10 equipmentCol10">
-          <div class="col-md-1 text-center equipmentDivs"><img src="img/dumbbell_icon.png" alt="basketball_icon" style="width: 100%; height: 100%;"></div>
+          <div class="col-md-1 text-center equipmentDivs"><img src="img/dumbbell_icon.png" alt="basketball_icon"
+              style="width: 100%; height: 100%;"></div>
           <div class="col-md-4 text-center equipmentDivs"><span id="dumbellOwned" class="equipmentSpan"></span></div>
           <div class="col-md-4 text-center equipmentDivs"><span id="dumbellExpected" class="equipmentSpan"></span></div>
-          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestDumbell" onclick="requestItem(this.id)"
-              class="btn"> +
+          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestDumbell"
+              onclick="requestItem(this.id)" class="btn"> +
               Request</button></div>
         </div>
         <div class="col-md-2 equipmentDivs text-center" style="border-right: 0;">
-          <a id="plusDumbell" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i class="fas fa-plus-circle fa-lg"></i></a>
+          <a id="plusDumbell" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i
+              class="fas fa-plus-circle fa-lg"></i></a>
           <a id="minusDumbell" onclick="minusEquipment(this.id)"><i class="fas fa-lg fa-minus-circle"></i></a>
         </div>
       </div>
       <div class="row" style="height: 70px; margin-top: 25px;">
         <div class="col-md-10 equipmentCol10">
-          <div class="col-md-1 text-center equipmentDivs"><img src="img/uniform_icon.png" alt="basketball_icon" style="width: 70%; height: 80%;"></div>
+          <div class="col-md-1 text-center equipmentDivs"><img src="img/uniform_icon.png" alt="basketball_icon"
+              style="width: 70%; height: 80%;"></div>
           <div class="col-md-4 text-center equipmentDivs"><span id="uniformOwned" class="equipmentSpan"> </span></div>
           <div class="col-md-4 text-center equipmentDivs"><span id="uniformExpected" class="equipmentSpan"></span></div>
-          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestUniform" onclick="requestItem(this.id)"
-              class="btn"> +
+          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestUniform"
+              onclick="requestItem(this.id)" class="btn"> +
               Request</button></div>
         </div>
         <div class="col-md-2 equipmentDivs text-center" style="border-right: 0;">
-          <a id="plusUniform" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i class="fas fa-plus-circle fa-lg"></i></a>
+          <a id="plusUniform" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i
+              class="fas fa-plus-circle fa-lg"></i></a>
           <a id="minusUniform" onclick="minusEquipment(this.id)"><i class="fas fa-lg fa-minus-circle"></i></a>
         </div>
       </div>
       <div class="row" style="height: 70px; margin-top: 25px;">
         <div class="col-md-10 equipmentCol10">
-          <div class="col-md-1 text-center equipmentDivs"><img src="img/jumprope_icon.png" alt="basketball_icon" style="width: 100%; height: 100%;"></div>
+          <div class="col-md-1 text-center equipmentDivs"><img src="img/jumprope_icon.png" alt="basketball_icon"
+              style="width: 100%; height: 100%;"></div>
           <div class="col-md-4 text-center equipmentDivs"> <span id="jumpropeOwned" class="equipmentSpan"></span></div>
-          <div class="col-md-4 text-center equipmentDivs"><span id="jumpropeExpected" class="equipmentSpan"></span></div>
-          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestJumprope" onclick="requestItem(this.id)"
-              class="btn">
+          <div class="col-md-4 text-center equipmentDivs"><span id="jumpropeExpected" class="equipmentSpan"></span>
+          </div>
+          <div class="col-md-3 text-center equipmentDivs" style="border: 0;"><button id="requestJumprope"
+              onclick="requestItem(this.id)" class="btn">
               + Request</button></div>
         </div>
         <div class="col-md-2 equipmentDivs text-center" style="border-right: 0;">
-          <a id="plusJumprope" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i class="fas fa-plus-circle fa-lg"></i></a>
+          <a id="plusJumprope" style="margin-right: 15px;" onclick="plusEquipment(this.id)"><i
+              class="fas fa-plus-circle fa-lg"></i></a>
           <a id="minusJumprope" onclick="minusEquipment(this.id)"><i class="fas fa-lg fa-minus-circle"></i></a>
         </div>
       </div>
@@ -124,8 +138,8 @@
   </div>
 
   <!-- -----  BUTTON FOR OPENING MODAL TO CHANGE EXPECTED LEVELS OF EQUIPMENT  ---- -->
-  <div class="openModalFixedBtn" id="setEquipmentBtn"><a data-toggle="modal" data-target="#equipmentSetupModal" id="modalTriggerBtn"
-      class="btn btn-primary" style="background-color: red; border: 0; color:white;">
+  <div class="openModalFixedBtn" id="setEquipmentBtn"><a data-toggle="modal" data-target="#equipmentSetupModal"
+      id="modalTriggerBtn" class="btn btn-primary" style="background-color: red; border: 0; color:white;">
       <i class="fas fa-cogs"></i> SET EQUIPMENT</a>
   </div>
   <!-- -------------------  MODAL FOR SETTING UP THE EQUIPMENT  ------------------- -->
@@ -176,10 +190,10 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" style="background-color:orange; color: white;" id="saveEquipmentChanges"
-            onclick="checkChanged()">SAVE</button>
-          <button type="button" class="btn btn-default" style="background-color:orange; color: white;" data-dismiss="modal"
-            id="closeEquipmentModal">CANCEL</button>
+          <button type="button" class="btn btn-default" style="background-color:orange; color: white;"
+            id="saveEquipmentChanges" onclick="checkChanged()">SAVE</button>
+          <button type="button" class="btn btn-default" style="background-color:orange; color: white;"
+            data-dismiss="modal" id="closeEquipmentModal">CANCEL</button>
         </div>
       </div>
     </div>
@@ -187,12 +201,15 @@
 
 
   <!--Loading all components for bootstrap-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

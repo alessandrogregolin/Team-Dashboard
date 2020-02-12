@@ -53,7 +53,6 @@ var teamID;
 //Here checking wether the user is new or not and then if he is not checking what user type he is(trainer or player) and changiong info displayed on dashboard
 function checkUser() {
   if (currentUser.displayName == null) {
-
     //The user is new and therefore set it up
     //Already see if he is a player or trainer and change db setting upon that
     if (localStorage.getItem('userType') == "trainer") {
@@ -61,18 +60,15 @@ function checkUser() {
     } else if (localStorage.getItem('userType') == "player") {
       addUserPlayer();
     };
-
   } else {
-
     //The user already exists, now check if he is a trainer or player
-    //Here check if the user logged in is a trainer or a player and tehrefore change the amount fo information dispalyed in the dahsboard
+    //Here check if the user logged in is a trainer or a player and tehrefore change the amount of information dispalyed in the dahsboard
     var userRef = db.collection("users").doc(currentUser.uid);
     userRef.get().then(function (doc) {
       if (doc.exists) {
         //The user data exists, now read it and check if user is a trainer or not
         if (doc.data().userType == "trainer") {
           //The user is a trainer
-
           var teamID = doc.data().teamID;
           window.teamID = teamID;
           console.log("user is trainer");
@@ -141,17 +137,16 @@ function addUserTrainer() {
     userType: localStorage.getItem('userType'),
     teamName: localStorage.getItem('teamName')
   };
-
+  //getting a reference to the database, in the users directory
   let ref = db.collection("users").doc(currentUser.uid);
   db.collection("users").doc(currentUser.uid).set(userData).then(function () {
-    //User correctly added to users directory, now create the team related
+    //User correctly added to users directory, now create the team associated with the trainer, in the teams directory
     db.collection("teams").add({
       name: localStorage.getItem('teamName'),
       trainerID: currentUser.uid
     }).then(function (newTeamRef) {
-      //The team was successfully created, now rerun the function to check if there are at least 5 players
       console.log("The team has been successfully created on the database");
-      //adding the teamID to the user account and to the team information
+      //adding the teamID to the user account and adding the trainer id to the team
 
       db.collection("users").doc(currentUser.uid).update({
         teamID: newTeamRef.id
@@ -161,18 +156,21 @@ function addUserTrainer() {
         teamID: newTeamRef.id
       });
 
+      //Changing the trainer name to the entered details in the index.html sign-up form
       currentUser.updateProfile({
         displayName: localStorage.getItem('trainerName')
       }).then(function () {
         //Update succesful
         localStorage.clear();
+        /*running the checkUser function, which checks if the trainer already has a team or if a player 
+        is in a team or has been kicked out*/
         checkUser();
       }).catch(function (error) {
         console.log("error at line 74, updating user display name", error.message);
       });
 
     }).catch(function (error) {
-      //Here create a red pupup that appears on the database and infroms the user
+      //Here a red pupup that appears on the database and infroms the user is created
       alert("There was an error creating your team on the database, please refresh the page to try again");
       console.log(error.message);
     });
@@ -240,7 +238,7 @@ function checkTeam(teamID) {
   teamRef.get().then(function (team) {
     if (team.exists) {
       //The team has been set up, now check if there are already at least 5 players
-    
+
       getEvents(teamID);
       teamRef.collection("players").get().then(function (players) {
         console.log(players.size);
